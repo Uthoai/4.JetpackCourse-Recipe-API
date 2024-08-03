@@ -15,4 +15,8 @@ data class CategoryData(
     val strCategoryThumb: String? = null
 )
 
-data class CategoryResponse(val categoryData: List<CategoryData>)
+@Keep
+data class CategoryResponse(
+    @SerializedName("categories")
+    val categoryData: List<CategoryData>
+)

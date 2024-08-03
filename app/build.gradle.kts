@@ -58,7 +58,12 @@ dependencies {
     //Json to Kotlin object mapping
     implementation(libs.retrofit.converter.gson)
     //coil - image load
-    implementation(libs.coil.compose)
+    //implementation(libs.coil.compose)
+    implementation("io.coil-kt:coil-compose:2.7.0")
+
+    //coroutines
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

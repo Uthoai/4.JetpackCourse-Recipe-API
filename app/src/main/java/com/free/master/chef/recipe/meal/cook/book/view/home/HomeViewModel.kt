@@ -1,5 +1,6 @@
 package com.free.master.chef.recipe.meal.cook.book.view.home
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -36,6 +37,8 @@ class HomeViewModel : ViewModel() {
                     loading = false,
                     error = "Error fetching Category ${e.message}"
                 )
+            } finally {
+                Log.d("TAG","${_categoriesState.value.list}")
             }
         }
     }
