@@ -1,6 +1,7 @@
 package com.free.master.chef.recipe.meal.cook.book.view.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -25,9 +26,11 @@ import com.free.master.chef.recipe.meal.cook.book.service.data.CategoryData
 
 
 @Composable
-fun RecipeScreen(modifier: Modifier = Modifier){
-    val recipeViewModel: HomeViewModel = viewModel()
-    val viewState by recipeViewModel.categoriesState
+fun RecipeScreen(
+    modifier: Modifier = Modifier,
+    viewState: HomeViewModel.RecipeState,
+    navigateToDetail: (CategoryData) -> Unit
+){
 
     Box(modifier = Modifier.fillMaxSize()) {
         when{
@@ -35,31 +38,37 @@ fun RecipeScreen(modifier: Modifier = Modifier){
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
             viewState.error != null->{
-                Text(text = "ERROR OCCURRED")
+                Text(text = "ERROR OCCURRED",modifier = Modifier.align(Alignment.Center))
             }
             else->{
-                CategoryScreen(categories = viewState.list)
+                CategoryScreen(categories = viewState.list, navigateToDetail)
             }
         }
     }
 }
 
 @Composable
-fun CategoryScreen(categories: List<CategoryData>){
+fun CategoryScreen(categories: List<CategoryData>,
+                   navigateToDetail: (CategoryData) -> Unit){
     LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
         items(categories){category->
-            CategoryItem(categoryData = category)
+            CategoryItem(categoryData = category, navigateToDetail)
         }
     }
 }
 
 //How each Item Looks like
 @Composable
-fun CategoryItem(categoryData: CategoryData){
+fun CategoryItem(categoryData: CategoryData,
+                 navigateToDetail: (CategoryData) -> Unit) {
     Column(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxSize()
+            .clickable {
+                navigateToDetail(categoryData)
+            },
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Image(

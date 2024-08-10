@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -50,7 +51,8 @@ android {
 }
 
 dependencies {
-
+    //navigation
+    implementation(libs.androidx.navigation.compose)
     //viewModel
     implementation(libs.lifecycle.viewmodel.compose)
     //retrofit - Network call

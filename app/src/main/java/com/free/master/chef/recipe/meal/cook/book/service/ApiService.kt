@@ -13,10 +13,9 @@ interface ApiService {
 
 object ApiClient{
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://www.themealdb.com/api/json/v1/1/")
+        .baseUrl(Constant.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     val recipeService = retrofit.create(ApiService::class.java)
 }
-
